@@ -1,27 +1,25 @@
-# Copyright (c) Facebook, Inc. and its affiliates.
-# All rights reserved.
-#
-# This source code is licensed under the license found in the
-# LICENSE file in the root directory of this source tree.
-#
-
 #!/bin/bash
+#SBATCH -p use-everything
 #SBATCH --nodes=8
-#SBATCH --gpus=64
+#SBATCH --gpus=32
 #SBATCH --ntasks-per-node=8
 #SBATCH --cpus-per-task=8
 #SBATCH --job-name=swav_800ep_pretrain
-#SBATCH --time=50:00:00
+#SBATCH --time=99:99:99
 #SBATCH --mem=450G
+#SBATCH --mail-user=rylansch
+#SBATCH --mail-type=FAIL
 
 master_node=${SLURM_NODELIST:0:9}${SLURM_NODELIST:10:4}
 dist_url="tcp://"
 dist_url+=$master_node
 dist_url+=:40000
 
-DATASET_PATH="/path/to/imagenet/train"
+DATASET_PATH="/home/akhilan/om2/train/"
 EXPERIMENT_PATH="./experiments/swav_800ep_pretrain"
 mkdir -p $EXPERIMENT_PATH
+
+source swav_venv/bin/activate
 
 srun --output=${EXPERIMENT_PATH}/%j.out --error=${EXPERIMENT_PATH}/%j.err --label python -u main_swav.py \
 --data_path $DATASET_PATH \
