@@ -1,4 +1,5 @@
-# Unsupervised Learning of Visual Features by Contrasting Cluster Assignments
+# Nonparametric SwAV
+
 This code provides a PyTorch implementation and pretrained models for **SwAV** (**Sw**apping **A**ssignments between **V**iews), as described in the paper [Unsupervised Learning of Visual Features by Contrasting Cluster Assignments](https://arxiv.org/abs/2006.09882).
 
 <div align="center">
